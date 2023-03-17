@@ -25,7 +25,7 @@ function all_clear() {
 
 function compute() {
     str = String(inp.value);
-    arr = /(-?[0-9]+.?[0-9])/.split(str);
+    arr = str.split(/(-?[0-9]+.?[0-9])/);
     alert(arr);
 
 //    cure();
