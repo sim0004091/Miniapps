@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>Calculator</title>
+    <style>
+      body
+      {
+	  background-color: hsl(0, 0%, 0%);
+	  color: hsl(120, 40%, 40%);
+      }
+
+      p
+      {
+	  width: 96%;
+	  margin: 0px;
+	  text-align: right;
+	  font-size: 40px;
+      }
+      
+      input[type='text']
+      {
+	  width: 97%;
+	  margin: 0.5%;
+	  font-size: 32px;
+	  text-align: right;
+      }
+ 
+      button
+      {
+	  width: 18.5%;
+	  margin: 0% 0% 0.5% 0.5%;
+	  font-size: 24px;
+      }
+
+      #calculator
+      {
+	  position: relative;
+	  width: 92%;
+	  height: 82vh;
+	  margin: auto;
+	  background-color: hsl(0, 0%, 20%);
+      }
+
+      #keypad
+      {
+	  position: absolute;
+	  bottom: 0px;
+      }
+    </style>
+    <script>
+      'use strict';
+      
+      window.onload = () =>
+      {
+	  const inp = document.getElementById('inp'),
+		oup = document.getElementById('oup');
+	  let str = '';
+      }
+
+      function all_clear()
+      {
+	  inp.value = '0';
+      }
+
+      function evaluate()
+      {
+	  str = inp.value;
+	  while (str = pair_braces(str));
+      }
+
+      function pair_braces(s)
+      {
+	  const braces = [];
+	  for (let i = 0; i < s.length; i++)
+	  {
+	      switch (str[i])
+	      {
+		  case '(':
+		      braces.push(i);
+		      break;
+		  case ')':
+		      if (braces.length == 0)
+		          return 'error';
+		  else
+		  {
+		      let sub = str.substring(braces.pop(), i);
+		      str.replace(sub, calculate(sub));
+		  }
+	      }
+	  }
+      }
+
+      function key_in(value)
+      {
+	  if (parseInt(value) && inp.value == '0')
+	      inp.value = value;
+	  else
+	      inp.value += value;
+      }
+
+      
+    </script>
+  </head>
+  <body>
+    <div id='calculator'>
+    <p id='oup'>0</p>
+    <input type='text' id='inp' value='0' />
+    <div id='keypad'>
+    <button id='shift'>Shift</button>
+    <button id='shift' onclick='key_in("log(")'>log</button>
+    <button id='shift' onclick='key_in("sin(")'>sin</button>
+    <button id='shift' onclick='key_in("cos(")'>cos</button>
+    <button id='shift' onclick='key_in("tan(")'>tan</button>
+    <button id='shift' onclick='key_in("^(")'>POW</button>
+    <button id='shift' onclick='key_in("^2")'>x²</button>
+    <button id='shift' onclick='key_in("√")'>√</button>
+    <button id='shift' onclick='key_in("(")'>(</button>
+    <button id='shift' onclick='key_in(")")'>)</button>
+    <button id='shift' onclick='key_in(7)'>7</button>
+    <button id='shift' onclick='key_in(8)'>8</button>
+    <button id='shift' onclick='key_in(9)'>9</button>
+    <button id='shift'>DEL</button>
+    <button id='shift' onclick='all_clear()'>AC</button>
+    <button id='shift' onclick='key_in(4)'>4</button>
+    <button id='shift' onclick='key_in(5)'>5</button>
+    <button id='shift' onclick='key_in(6)'>6</button>
+    <button id='key_multiple' onclick='key_in("*")'>*</button>
+    <button id='key_divide' onclick='key_in("/")'>/</button>
+    <button id='key_1' onclick='key_in(1)'>1</button>
+    <button id='key_2' onclick='key_in(2)'>2</button>
+    <button id='key_3' onclick='key_in(3)'>3</button>
+    <button id='key_plus' onclick='key_in("+")'>+</button>
+    <button id='key_minus' onclick='key_in("-")'>_</button>
+    <button id='key_pi' onclick='key_in("π")'>π</button>
+    <button id='key_0' onclick='key_in(0)'>0</button>
+    <button id='key_point' onclick='key_in(".")'>.</button>
+    <button id='key_equal' onclick='calculate()'>=</button>
+    <button id='key_ans'>Ans</button>
+    </div>
+    </div>
+  </body>
+</html>
